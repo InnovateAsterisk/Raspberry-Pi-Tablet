@@ -19,4 +19,4 @@ To develop a 3D printable, Raspberry Pi based tablet. All parts (components) mus
 - **LEDs**
   - Charge
   - Power and activity LED light is redirected (using nylon) to the case.
-**Backplate:** Bamboo wood back, with laser etched decal
+- **Backplate:** Bamboo wood back, with laser etched decal
