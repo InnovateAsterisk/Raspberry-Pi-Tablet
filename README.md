@@ -1,7 +1,7 @@
 # Raspberry-Pi-Tablet
 For the moment, this project contains pictures of the First attempt.
 
-![Image of Raspberry Pi Tablet](https://github.com/InnovateAsterisk/Raspberry-Pi-Tablet/blob/master/V1/Pictures/IMG_2949.jpg)
+![Image of Raspberry Pi Tablet](https://github.com/InnovateAsterisk/Raspberry-Pi-Tablet/blob/master/V1/Pictures/IMG_2948.jpg)
 
 ## Project Goals
 To develop a 3D printable, Raspberry Pi based tablet. All parts (components) must be easy to obtain and readily available. It must have a battery, and it must be the primary source of power (meaning, it will charge up with a cable plugged in, but must have enough power to run without it.) It must be able to opperate perfect fine without a keyboard (meaning, everything in the user interface should work without an issue even if you dont have a keyboard and mouse plugged in.)
