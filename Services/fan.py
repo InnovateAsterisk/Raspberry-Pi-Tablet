@@ -7,7 +7,7 @@ import time
 import os
 
 # Program variables
-PWM_GPIO_PIN = 27	# The GPIO pin wired to the Misfit Transistor
+PWM_GPIO_PIN = 27	# The GPIO pin wired to the Mosfet Transistor
 PWM_FREQUENCY = 50	# The PWN frequency (Don't change this, change the Duty Cycle)
 DUTY_CYCLE = 0 		# values between 0 and 100 to control fan speed
 

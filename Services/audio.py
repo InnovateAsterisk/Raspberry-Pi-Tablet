@@ -1,94 +1,82 @@
-# Handles the Volume Up/down and the Headphone Jack 
+# Handles the Volume Up/down and the Headphone Jack
 # =================================================
+
 
 import RPi.GPIO as GPIO
 import sys
 import time
 import os
+import alsaaudio
 
-IsJackIn = false;
+# print alsaaudio.cards()        # If we uninstall the primary card, this list is empty
+# print alsaaudio.mixers() # [Master][Capture]
+MasterMixer = alsaaudio.Mixer("Master")
 
-# alsamixer
-GET volume: "amixer -M sget PCM"
-SET volume: "amixer -q -M sset PCM 50%"
+IS_JACK_IN = False      # If the headphone jack is n use
+VOL_UP_GPIO_PIN = 24    # The GPIO pin (BCM) for Volume Up (Green)
+VOL_DOWN_GPIO_PIN = 23  # The GPIO pin (BCM) for Volume Down (Yellow)
 
+# Setup GPIO
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(VOL_UP_GPIO_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(VOL_DOWN_GPIO_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-===================
-#!/bin/bash
+def IncreaseVolume():
+    # Get the current volume
+    v = MasterMixer.getvolume()[0]
 
-MIX=amixer
-declare -i LO=0     # Minimum volume; try 10 to avoid complete silence
-declare -i HI=100   # Maximum volume; try 95 to avoid distortion
-declare -i ADJ=3    # Volume adjustment step size
+    if v >= 100:
+        print("Max Volume!")
+        return
+    else:
+        print("Increase Volume from "+ str(v) +" to "+ str(v+5) +"")
+        MasterMixer.setvolume(v+5) 
+        return
 
-usage ()
-{
-	echo "Usage: `basename $0` [ - | + | N ]" >&2
-	echo "  where N is a whole number between $LO and $HI, inclusive." >&2
-	exit 1
-}
+def DecreaseVolume():
+    # Get the current volume
+    v = MasterMixer.getvolume()[0]
 
-# Zero or one argument
-[ $# -le 1 ] || usage
+    if v <= 0:
+        print("Min Volume!")
+        return
+    else:
+        print("Decrease Volume from "+ str(v)  +" to "+ str(v-5) +"")
+        MasterMixer.setvolume(v-5)
+        return
 
-# Argument must be one of: empty, -, +, number
-[[ $1 == ?(-|+|+([0-9])) ]] || usage
+def button_volume(pin):
+    # Check if muted, and if so, unmute
+    if MasterMixer.getmute()[0]: 
+        print("Unmuted")
+        MasterMixer.setmute(0)
 
-ARG="$1"
+    # Identify Direction
+    if pin == VOL_UP_GPIO_PIN:
+        IncreaseVolume()
+    elif pin == VOL_DOWN_GPIO_PIN:
+        DecreaseVolume()
+    else:
+        print("Unknown PIN")
 
-# Number argument
-if [[ $ARG == +([0-9]) ]]; then
-	# Strip leading zeros
-	while [[ $ARG == 0+([0-9]) ]]; do
-		ARG=${ARG#0}
-	done
-	# Must be between LO and HI
-	(( ARG >= LO && ARG <= HI )) || usage
-fi
+GPIO.add_event_detect(VOL_UP_GPIO_PIN, GPIO.FALLING, callback=button_volume, bouncetime=1000)
+GPIO.add_event_detect(VOL_DOWN_GPIO_PIN, GPIO.FALLING, callback=button_volume, bouncetime=1000)
 
-EXE=$(which $MIX)
-if [ -z "$EXE" ]; then
-	echo "Error: $MIX not found. Try \"sudo apt-get install alsa-utils\" first." >&2
-	exit 2
-fi
+while True: # Run forever
+    # Mute
+    if (GPIO.input(VOL_UP_GPIO_PIN) == False and GPIO.input(VOL_DOWN_GPIO_PIN) == False):
+        if MasterMixer.getmute()[0] == False:
+            MasterMixer.setmute(1)
+            print("Mute Active, press either volume up or down to unmute")
+        else:
+            print("Mute already active")
+    else:
+        # Vol Up
+        if GPIO.input(VOL_UP_GPIO_PIN) == False:
+            IncreaseVolume()
+        # Vol Down
+        if GPIO.input(VOL_DOWN_GPIO_PIN) == False:
+            DecreaseVolume()
 
-GET=$($EXE cget numid=1)
-declare -i MIN=$(echo $GET | /bin/grep -E -o -e ',min=[^,]+' | /bin/grep -E -o -e '[0-9-]+')
-declare -i MAX=$(echo $GET | /bin/grep -E -o -e ',max=[^,]+' | /bin/grep -E -o -e '[0-9-]+')
-declare -i VAL=$(echo $GET | /bin/grep -E -o -e ': values=[0-9+-]+' | /bin/grep -E -o -e '[0-9-]+')
-
-if (( MIN >= MAX || VAL < MIN || VAL > MAX )); then
-	echo "Error: could not get the right values from $MIX output." >&2
-	exit 3
-fi
-
-declare -i LEN=0
-(( LEN = MAX - MIN ))
-
-declare -i ABS=0
-(( ABS = VAL - MIN ))
-
-declare -i PCT=0
-(( PCT = 100 * ABS / LEN ))
-
-if [ ! -z "$ARG" ]; then
-
-	declare -i OLD=$PCT
-
-	if [[ "$ARG" == "+" ]]; then
-		(( PCT += ADJ ))
-	elif [[ "$ARG" == "-" ]]; then
-		(( PCT -= ADJ ))
-	else
-		PCT=$ARG
-	fi
-
-	if [[ "$PCT" != "$OLD" ]]; then
-		(( ABS = PCT * LEN / 100 ))
-		(( VAL = MIN + ABS ))
-		$EXE -q cset numid=1 -- $VAL
-	fi
-fi
-
-echo $PCT
-exit 0
+    # Slow
+    time.sleep(0.1)
