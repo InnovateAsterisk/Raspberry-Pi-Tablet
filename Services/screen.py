@@ -1,7 +1,6 @@
 # Handles screen rotation using the Gyro
 # ======================================
 
-!/usr/bin/python
 import smbus
 import math
 import time
@@ -111,28 +110,28 @@ while True:
                 if(rotation != "normal"):
                         rotation = "normal"
                         print("Screen Rotate: Normal")
-                        os.popen("xrandr --output DSI-1 --rotate normal")
-                        os.popen("xinput --set-prop 'FT5406 memory based driver' 'Coordinate Transformation Matrix' 0 0 0 0 0 0 0 0 0")
+                        os.popen("xrandr -display :0.0 --output DSI-1 --rotate normal")
+                        os.popen("DISPLAY=:0 xinput --set-prop 'FT5406 memory based driver' 'Coordinate Transformation Matrix' 0 0 0 0 0 0 0 0 0")
         elif r < -20:
                 # You rotate Left (Set Screen to Right)
                 if(rotation != "left"):
                         rotation = "left"
                         print("Screen Rotate Left")
-                        os.popen("xrandr --output DSI-1 --rotate right")
-                        os.popen("xinput --set-prop 'FT5406 memory based driver' 'Coordinate Transformation Matrix' 0 1 0 -1 0 1 0 0 1")
+                        os.popen("xrandr -display :0.0 --output DSI-1 --rotate right")
+                        os.popen("DISPLAY=:0 xinput --set-prop 'FT5406 memory based driver' 'Coordinate Transformation Matrix' 0 1 0 -1 0 1 0 0 1")
         elif r > 20:
                 # You rotate Right (Set Screen Left)
                 if(rotation != "right"):
                         rotation = "right"
                         print("Screen Rotate Right")
-                        os.popen("xrandr --output DSI-1 --rotate left")
-                        os.popen("xinput --set-prop 'FT5406 memory based driver' 'Coordinate Transformation Matrix' 0 -1 1 1 0 0 0 0 1")
+                        os.popen("xrandr -display :0.0 --output DSI-1 --rotate left")
+                        os.popen("DISPLAY=:0 xinput --set-prop 'FT5406 memory based driver' 'Coordinate Transformation Matrix' 0 -1 1 1 0 0 0 0 1")
         else: 
                 # Rotate 180
                 if(rotation != "inverted"):
                         rotation = "inverted"
                         print("Rotate 180")
-                        os.popen("xrandr --output DSI-1 --rotate inverted")
-                        os.popen("xinput --set-prop 'FT5406 memory based driver' 'Coordinate Transformation Matrix' -1 0 1 0 -1 1 0 0 1")
+                        os.popen("xrandr -display :0.0 --output DSI-1 --rotate inverted")
+                        os.popen("DISPLAY=:0 xinput --set-prop 'FT5406 memory based driver' 'Coordinate Transformation Matrix' -1 0 1 0 -1 1 0 0 1")
 
 
