@@ -25,7 +25,7 @@ To develop a 3D printable, Raspberry Pi based tablet. All parts (components) mus
 ## Images
 ![Image of Raspberry Pi Tablet](https://github.com/InnovateAsterisk/Raspberry-Pi-Tablet/blob/master/V2/Pictures/IMG_3691_web.jpg)
 
-![Image of Raspberry Pi Tablet](https://github.com/InnovateAsterisk/Raspberry-Pi-Tablet/blob/master/V2/Pictures/IMG_3692_web.jpg)
+![Image of Raspberry Pi Tablet](https://github.com/InnovateAsterisk/Raspberry-Pi-Tablet/blob/master/V2/Pictures/IMG_3689_web.jpg)
 
 ![Image of Raspberry Pi Tablet](https://github.com/InnovateAsterisk/Raspberry-Pi-Tablet/blob/master/V2/Pictures/Render_1_web.jpg)
 
