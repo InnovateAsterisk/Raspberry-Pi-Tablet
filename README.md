@@ -1,4 +1,4 @@
-# Raspberry-Pi-Tablet
+# Raspberry Pi Tablet
 
 ![Image of Raspberry Pi Tablet](https://github.com/InnovateAsterisk/Raspberry-Pi-Tablet/blob/master/V2/Pictures/IMG_3692_web.jpg)
 
