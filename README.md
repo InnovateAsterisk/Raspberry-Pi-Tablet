@@ -23,7 +23,7 @@ To develop a 3D printable, Raspberry Pi based tablet. All parts (components) mus
 - **Backplate:** Bamboo wood back, with laser etched decal
 
 ## How To Video 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/wbJU22Zt_uo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/wbJU22Zt_uo/0.jpg)](https://www.youtube.com/watch?v=wbJU22Zt_uo)
 
 ## Images
 ![Image of Raspberry Pi Tablet](https://github.com/InnovateAsterisk/Raspberry-Pi-Tablet/blob/master/V2/Pictures/IMG_3691_web.jpg)
