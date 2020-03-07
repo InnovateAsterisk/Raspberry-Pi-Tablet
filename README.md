@@ -22,6 +22,9 @@ To develop a 3D printable, Raspberry Pi based tablet. All parts (components) mus
   - Power and activity LED light is redirected (using nylon) to the case.
 - **Backplate:** Bamboo wood back, with laser etched decal
 
+## How To Video 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/wbJU22Zt_uo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ## Images
 ![Image of Raspberry Pi Tablet](https://github.com/InnovateAsterisk/Raspberry-Pi-Tablet/blob/master/V2/Pictures/IMG_3691_web.jpg)
 
