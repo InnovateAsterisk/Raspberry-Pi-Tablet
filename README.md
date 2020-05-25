@@ -25,6 +25,11 @@ To develop a 3D printable, Raspberry Pi based tablet. All parts (components) mus
 ## How To Video 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/wbJU22Zt_uo/0.jpg)](https://www.youtube.com/watch?v=wbJU22Zt_uo)
 
+## Articles
+- https://www.instructables.com/id/Raspberry-Pi-4B-3D-Printed-Tablet/
+- https://www.hackster.io/news/innovate-asterisk-unveils-a-3d-printed-raspberry-pi-4-powered-tablet-be6d5298e047
+- https://www.crackedconsole.com/2020/02/24/innovate-asterisk-unveils-a-3d-printed-raspberrypi-4-powered-tablet/
+
 ## Images
 ![Image of Raspberry Pi Tablet](https://github.com/InnovateAsterisk/Raspberry-Pi-Tablet/blob/master/V2/Pictures/IMG_3691_web.jpg)
 
